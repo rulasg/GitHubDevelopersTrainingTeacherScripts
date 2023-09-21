@@ -30,7 +30,7 @@ CompanyName = 'Unknown'
 Copyright = '(c) rulasg. All rights reserved.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = 'This Module is intended to help GitHub Developers Training Teachers to create the training environment.'
 
 # Minimum version of the PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -98,10 +98,10 @@ PrivateData = @{
         # Tags = @()
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/rulasg/GitHubDevelopersTrainingTeacherScripts/blob/main/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/rulasg/GitHubDevelopersTrainingTeacherScripts'
 
         # A URL to an icon representing this module.
         # IconUri = ''
@@ -110,7 +110,7 @@ PrivateData = @{
         # ReleaseNotes = ''
 
         # Prerelease string of this module
-        # Prerelease = ''
+        Prerelease = 'Preview'
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
         # RequireLicenseAcceptance = $false
