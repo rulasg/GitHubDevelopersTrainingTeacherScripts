@@ -2,21 +2,24 @@ function Get-ClassUsers{
     [CmdletBinding()]
     param(
         # Target repo
-        [Parameter(Mandatory, Position=0)]
+        [Parameter(Mandatory,Position=0, ValueFromPipeline)]
         [string]$ClassRepo
     )
 
-    $issueId = Find-FirstActivityIssue -ClassRepo $ClassRepo
+    process {
 
-    $command = 'gh issue view {issueId}  -R ps-developers-sandbox/{repo} --json body | convertfrom-json'
-    $command = $command -replace '{issueId}', $issueId
-    $command = $command -replace '{repo}', $ClassRepo
-
-    $result = Invoke-Expression $command
-
-    $list = $result.body -split "`n" | Where-Object{$_[0] -eq '-'} | %{ ($_ -split '@')[1]}
-
-    return $list
+        $issueId = Find-FirstActivityIssue -ClassRepo $ClassRepo
+        
+        $command = 'gh issue view {issueId}  -R ps-developers-sandbox/{repo} --json body | convertfrom-json'
+        $command = $command -replace '{issueId}', $issueId
+        $command = $command -replace '{repo}', $ClassRepo
+        
+        $result = Invoke-Expression $command
+        
+        $list = $result.body -split "`n" | Where-Object{$_[0] -eq '-'} | %{ ($_ -split '@')[1]}
+        
+        return $list
+    }
 } Export-ModuleMember -Function Get-ClassUsers
 
 function Find-FirstActivityIssue{
@@ -48,5 +51,4 @@ function Find-FirstActivityIssue{
     }
 
     return $issue.number
-
 }
