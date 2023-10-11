@@ -32,14 +32,14 @@ function Test-ConflictPracticeRepoPR3{
         $RepoName = "$CLASS_ORG/conflict-practice-$User"
 
         # $result = gh pr view 3 -R "$CLASS_ORG/conflict-practice-$User" --json title | convertfrom-json
-        $result = gh pr view 3 -R $RepoName *>&1 
+        $result = gh pr view 3 -R $RepoName *>&1
 
         $result | write-verbose
 
         # $Exists = $result[0].StartsWith("title:  Update README")
         # check if $result is of type error
         $NotExists = $result.GetType().Name -eq 'ErrorRecord'
-        
+
         [PSCustomObject]@{
             User = $User
             Repo = $RepoName

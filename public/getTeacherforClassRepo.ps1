@@ -28,11 +28,11 @@ function Get-TeacherOfConflictPracticeRepo{
     process{
 
         $repo = Get-ClassRepoName -User $User -Owner:$Owner -ClassRepo 'conflict-practice'
-        
+
         $command = 'gh pr view 1 -R {0} --json author' -f $repo
 
         $result = Invoke-GhExpression $command -Whatif:$WhatIfPreference
-        
+
         return $result
     }
 } Export-ModuleMember -Function Get-TeacherOfConflictPracticeRepo
