@@ -2,17 +2,22 @@ function Get-ClassUsers{
     [CmdletBinding(SupportsShouldProcess)]
     param(
         # Target repo
-        [Parameter(Mandatory,Position=0, ValueFromPipeline)]
-        [string]$ClassRepo
+        [Parameter(Mandatory,Position=0, ValueFromPipeline)][string]$RepoName,
+        # Owner of the repo
+        [Parameter()][string]$Owner
     )
 
     process {
 
-        $issueId = Find-FirstActivityIssue -ClassRepo $ClassRepo
+        # $owner = Get-OwnerFromEnvironment -Owner $Owner
+        $owner = Resolve-Owner -Owner $Owner
+
+        $issueId = Find-FirstActivityIssue -RepoName $RepoName -Owner $owner
         
-        $command = 'gh issue view {issueId} -R ps-developers-sandbox/{repo} --json body'
+        $command = 'gh issue view {issueId} -R {owner}/{repo} --json body'
         $command = $command -replace '{issueId}', $issueId
-        $command = $command -replace '{repo}', $ClassRepo
+        $command = $command -replace '{repo}', $RepoName
+        $command = $command -replace '{owner}', $owner
         
         if ($PSCmdlet.ShouldProcess("Invoke-GhExpression", $command)) {
             $result = Invoke-GhExpression $command
@@ -36,15 +41,18 @@ function Find-FirstActivityIssue{
     [CmdletBinding(SupportsShouldProcess)]
     param(
         # Target repo
-        [Parameter(Mandatory, Position=0)]
-        [string]$ClassRepo
+        [Parameter(Mandatory, Position=0)][string]$RepoName,
+        # Owner of the repo
+        [Parameter()][string]$Owner
     )
 
     $ISSUE_TITLE = 'Activity 1: Your First Caption'
 
-    $command = 'gh issue list -R ps-developers-sandbox/{repo} --json title,number -s all'
+    $repoName = Get-ClassRepoName -RepoName $RepoName -Owner $Owner
 
-    $command = $command -replace '{repo}', $ClassRepo
+    $command = 'gh issue list -R {repo} --json title,number -s all'
+
+    $command = $command -replace '{repo}', $repoName
 
     if ($PSCmdlet.ShouldProcess("Invoke-GhExpression", $command)) {
         $result = Invoke-GhExpression $command
