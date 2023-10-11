@@ -1,73 +1,77 @@
 
-function Set-EnvironmentForScripts{
+function Set-EnvironmentForScript{
     [CmdletBinding()]
     param(
-        [Parameter()][string]$INSTANCE_URL='api.github.com',
-        [Parameter()][string]$ROOT_URL='github.com',
-        [Parameter()][string]$CLASS_ORG='ps-developers-sandbox'
+        [Parameter()][string]$ApiUrl='api.github.com',
+        [Parameter()][string]$HostUrl='github.com',
+        [Parameter()][string]$Owner='ps-developers-sandbox'
     )
 
-    $global:INSTANCE_URL = $INSTANCE_URL
-    $global:ROOT_URL = $ROOT_URL
-    $global:CLASS_ORG = $CLASS_ORG
-
-    Get-EnvironmentForScripts
-} Export-ModuleMember -Function Set-EnvironmentForScripts
-
-function Get-EnvironmentForScripts{
-    [CmdletBinding()]
-    param(
-    )
-
-    [PSCustomObject]@{
-        INSTANCE_URL = $global:INSTANCE_URL
-        ROOT_URL = $global:ROOT_URL
-        CLASS_ORG = $global:CLASS_ORG
+    $global:GHDEVTRTCHSCPT_ENV = [PSCustomObject]@{
+        ApiUrl = $ApiUrl
+        HostUrl = $HostUrl
+        Owner = $Owner
     }
-} Export-ModuleMember -Function Get-EnvironmentForScripts
 
-function Get-EnvOwner{
+    return $global:GHDEVTRTCHSCPT_ENV
+} Export-ModuleMember -Function Set-EnvironmentForScript
+
+function Get-EnvironmentForScript{
     [CmdletBinding()]
     param(
     )
 
-    if(!Test-EnvironmentForScripts){
-        Set-EnvironmentForScripts
-    }
+    return $global:GHDEVTRTCHSCPT_ENV
 
-    $environment = Get-EnvironmentForScripts
+} Export-ModuleMember -Function Get-EnvironmentForScript
 
-    $environment.CLASS_ORG
-} Export-ModuleMember -Function Get-EnvOwner
-
-
-function Test-EnvironmentForScripts{
+function Get-OwnerFromEnvironment{
     [CmdletBinding()]
     param(
     )
 
-    $ret = $true
-
-    #check if INSTANCE_URL is null or white spaces
-    if([string]::IsNullOrWhiteSpace($global:INSTANCE_URL)){
-        Write-Warning "INSTANCE_URL is not set"
-        $ret = $false
-    }
-    
-
-    #check if ROOT_URL is null or white spaces
-    if([string]::IsNullOrWhiteSpace($global:ROOT_URL)){
-        Write-Warning "ROOT_URL is not set"
-        $ret = $false
+    if(!(Test-EnvironmentForScript)){
+        Set-EnvironmentForScript
     }
 
-    #check if CLASS_ORG null or white spaces
-    if([string]::IsNullOrWhiteSpace($global:CLASS_ORG)){
-        Write-Warning "CLASS_ORG is not set"
-        $ret = $false
+    $environment = Get-EnvironmentForScript
+
+    $environment.Owner
+
+} Export-ModuleMember -Function Get-OwnerFromEnvironment
+
+
+
+function Test-EnvironmentForScript{
+    [CmdletBinding()]
+    param(
+    )
+
+    #check that $global:GHDEVTRTCHSCPT_ENV is not null
+    if(! $global:GHDEVTRTCHSCPT_ENV){
+        Write-Warning "GHDEVTRTCHSCPT_ENV is not set"
+        return $false
     }
 
-    return $ret
+    #checkif $global:GHDEVTRTCHSCPT_ENV.ApiUrl is null or white spaces
+    if([string]::IsNullOrWhiteSpace($global:GHDEVTRTCHSCPT_ENV.ApiUrl)){
+        Write-Warning "GHDEVTRTCHSCPT_ENV.ApiUrl is not set"
+        return $false
+    }
 
-} Export-ModuleMember -Function Test-EnvironmentForScripts
+    #checkif $global:GHDEVTRTCHSCPT_ENV.HostUrl is null or white spaces
+    if([string]::IsNullOrWhiteSpace($global:GHDEVTRTCHSCPT_ENV.HostUrl)){
+        Write-Warning "GHDEVTRTCHSCPT_ENV.HostUrl is not set"
+        return $false
+    }
+
+    #checkif $global:GHDEVTRTCHSCPT_ENV.Owner is null or white spaces
+    if([string]::IsNullOrWhiteSpace($global:GHDEVTRTCHSCPT_ENV.Owner)){
+        Write-Warning "GHDEVTRTCHSCPT_ENV.Owner is not set"
+        return $false
+    }
+
+    return $true
+} Export-ModuleMember -Function Test-EnvironmentForScript
+
 

@@ -1,36 +1,3 @@
-function Get-ConflictRepoName{
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory)][string]$User,
-        [Parameter()][string]$Owner
-    )
-
-    # Check if $owner is null or white spaces
-    if([string]::IsNullOrWhiteSpace($Owner)){
-        $Owner = $(Get-EnvOwner)
-    }
-
-    $repo = "{0}/conflict-practice-{1}" -f $Owner, $User
-
-    return $repo
-}
-
-function Get-GamesRepoName{
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory)][string]$User,
-        [Parameter()][string]$Owner
-    )
-
-    # Check if $owner is null or white spaces
-    if([string]::IsNullOrWhiteSpace($Owner)){
-        $Owner = $(Get-EnvOwner)
-    }
-
-    $repo = "{0}/github-games-{1}" -f $Owner, $User
-
-    return $repo
-}
 
 function Get-ClassRepoName{
     [CmdletBinding(SupportsShouldProcess)]
@@ -40,10 +7,10 @@ function Get-ClassRepoName{
         [Parameter()][string]$Owner
 
     )
-    
+
     # Check if $owner is null or white spaces
     if([string]::IsNullOrWhiteSpace($Owner)){
-        $Owner = $(Get-EnvOwner)
+        $Owner = $(Get-OwnerFromEnvironment)
     }
 
     $repoName = "{0}/{1}-{2}" -f $Owner,$ClassRepo,$User
@@ -60,7 +27,7 @@ function Get-TeacherOfConflictPracticeRepo{
 
     process{
 
-        $repo = Get-ClassRepoName -User $User -Owner $Owner -ClassRepo 'conflict-practice'
+        $repo = Get-ClassRepoName -User $User -Owner:$Owner -ClassRepo 'conflict-practice'
         
         $command = 'gh pr view 1 -R {0} --json author' -f $repo
 
@@ -90,5 +57,3 @@ function Get-TeacherOfGithubGameRepo{
     }
 
 } Export-ModuleMember -Function Get-TeacherOfGithubGameRepo
-
-
