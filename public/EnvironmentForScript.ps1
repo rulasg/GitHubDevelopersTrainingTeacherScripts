@@ -40,8 +40,6 @@ function Get-OwnerFromEnvironment{
 
 } Export-ModuleMember -Function Get-OwnerFromEnvironment
 
-
-
 function Test-EnvironmentForScript{
     [CmdletBinding()]
     param(
