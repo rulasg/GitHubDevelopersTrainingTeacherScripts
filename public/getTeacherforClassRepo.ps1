@@ -5,13 +5,14 @@ function Get-ClassRepoName{
         [Parameter(Mandatory)][ValidateSet("conflict-practice", "github-games")][string]$ClassRepo,
         [Parameter(Mandatory, Position=0)][string]$User,
         [Parameter()][string]$Owner
-
     )
 
     # Check if $owner is null or white spaces
     if([string]::IsNullOrWhiteSpace($Owner)){
-        $Owner = $(Get-OwnerFromEnvironment)
+        $Owner = Get-OwnerFromEnvironment
     }
+
+    $Owner = $Owner.Trim()
 
     $repoName = "{0}/{1}-{2}" -f $Owner,$ClassRepo,$User
 
