@@ -10,7 +10,7 @@ function Get-ClassUsers{
 
         $issueId = Find-FirstActivityIssue -ClassRepo $ClassRepo
         
-        $command = 'gh issue view {issueId}  -R ps-developers-sandbox/{repo} --json body'
+        $command = 'gh issue view {issueId} -R ps-developers-sandbox/{repo} --json body'
         $command = $command -replace '{issueId}', $issueId
         $command = $command -replace '{repo}', $ClassRepo
         
