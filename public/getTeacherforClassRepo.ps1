@@ -1,24 +1,4 @@
 
-function Get-ClassRepoName{
-    [CmdletBinding(SupportsShouldProcess)]
-    param(
-        [Parameter(Mandatory)][ValidateSet("conflict-practice", "github-games")][string]$ClassRepo,
-        [Parameter(Mandatory, Position=0)][string]$User,
-        [Parameter()][string]$Owner
-    )
-
-    # Check if $owner is null or white spaces
-    if([string]::IsNullOrWhiteSpace($Owner)){
-        $Owner = Get-OwnerFromEnvironment
-    }
-
-    $Owner = $Owner.Trim()
-
-    $repoName = "{0}/{1}-{2}" -f $Owner,$ClassRepo,$User
-
-    return $repoName
-}
-
 function Get-TeacherOfConflictPracticeRepo{
     [CmdletBinding(SupportsShouldProcess)]
     param(
@@ -28,7 +8,7 @@ function Get-TeacherOfConflictPracticeRepo{
 
     process{
 
-        $repo = Get-ClassRepoName -User $User -Owner:$Owner -ClassRepo 'conflict-practice'
+        $repo = Get-ActivityRepoName -User $User -Owner:$Owner -ActivityRepo 'conflict-practice'
 
         $command = 'gh pr view 1 -R {0} --json author' -f $repo
 
@@ -48,7 +28,7 @@ function Get-TeacherOfGithubGameRepo{
 
     process{
 
-        $repo = Get-ClassRepoName -user $User -Owner $Owner -ClassRepo 'github-games'
+        $repo = Get-ActivityRepoName -user $User -Owner $Owner -ActivityRepo 'github-games'
 
         $command = 'gh issue view 1 -R {0} --json author' -f $repo
 
