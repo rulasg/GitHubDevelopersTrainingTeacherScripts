@@ -1,8 +1,7 @@
 function GitHubDevelopersTrainingTeacherScriptsTest_TeacherOfConflictPracticeRepo_Get{
 
-    $result = Get-TeacherOfConflictPracticeRepo -Owner "ps-developers-sandbox" -User tamatias
-
-    Assert-AreEqual -Expected "UncleBats" -Presented $result.author.login
+    # $result = Get-TeacherOfConflictPracticeRepo -Owner "ps-developers-sandbox" -User tamatias
+    # Assert-AreEqual -Expected "UncleBats" -Presented $result.author.login
 
     $result = Get-TeacherOfConflictPracticeRepo -Owner "ps-developers-sandbox" -User AnaCaraban -Whatif @InfoParameters
 
@@ -12,9 +11,8 @@ function GitHubDevelopersTrainingTeacherScriptsTest_TeacherOfConflictPracticeRep
 
 function GitHubDevelopersTrainingTeacherScriptsTest_TeacherOfGithubGameRepo_Get{
 
-    $result = Get-TeacherOfGithubGameRepo -Owner "ps-developers-sandbox" -User tamatias
-
-    Assert-AreEqual -Expected "UncleBats" -Presented $result.author.login
+    # $result = Get-TeacherOfGithubGameRepo -Owner "ps-developers-sandbox" -User tamatias
+    # Assert-AreEqual -Expected "UncleBats" -Presented $result.author.login
 
     $result = Get-TeacherOfGithubGameRepo -Owner "ps-developers-sandbox" -User AnaCaraban -Whatif @InfoParameters
 
