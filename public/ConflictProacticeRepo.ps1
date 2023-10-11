@@ -42,6 +42,7 @@ function Test-ConflictPracticeRepoPR3{
         
         [PSCustomObject]@{
             User = $User
+            Repo = $RepoName
             Exists = -Not $NotExists
         }
     }
