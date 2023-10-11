@@ -1,4 +1,4 @@
-function GitHubDevelopersTrainingTeacherScriptsTest_trainingUsers_Get{
+function GitHubDevelopersTrainingTeacherScriptsTest_ClassUsers_Get{
 
     $result = Get-ClassUsers -ClassRepo "rulasg-231010" -WhatIf @InfoParameters
 

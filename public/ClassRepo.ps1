@@ -23,6 +23,7 @@ function Test-ClassRepo{
 
         [PSCustomObject]@{
             User = $User
+            Repo = $RepoName
             Exists = $Exists
         }
     }
