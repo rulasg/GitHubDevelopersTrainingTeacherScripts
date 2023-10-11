@@ -1,6 +1,6 @@
-function GitHubDevelopersTrainingTeacherScriptsTest_TeacherOfClassRepo_Get{
+function GitHubDevelopersTrainingTeacherScriptsTest_TeacherOfConflictPracticeRepo_Get{
 
-    $result = Get-TeacherOfConflictPracticeRepo -Owner "ps-developers-sandbox" -User AnaCaraban
+    $result = Get-TeacherOfConflictPracticeRepo -Owner "ps-developers-sandbox" -User wulfland
 
     Assert-AreEqual -Expected "rulasg" -Presented $result.author.login
 
@@ -10,9 +10,9 @@ function GitHubDevelopersTrainingTeacherScriptsTest_TeacherOfClassRepo_Get{
     Assert-Contains -Expected 'gh pr view 1 -R ps-developers-sandbox/conflict-practice-AnaCaraban --json author' -Presented $infoVar
 }
 
-function GitHubDevelopersTrainingTeacherScriptsTest_TeacherOfClassRepo_Get{
+function GitHubDevelopersTrainingTeacherScriptsTest_TeacherOfGithubGameRepo_Get{
 
-    $result = Get-TeacherOfGithubGameRepo -Owner "ps-developers-sandbox" -User AnaCaraban
+    $result = Get-TeacherOfGithubGameRepo -Owner "ps-developers-sandbox" -User wulfland
 
     Assert-AreEqual -Expected "rulasg" -Presented $result.author.login
 

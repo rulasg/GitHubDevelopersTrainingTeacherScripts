@@ -26,6 +26,21 @@ function Get-EnvironmentForScripts{
     }
 } Export-ModuleMember -Function Get-EnvironmentForScripts
 
+function Get-EnvOwner{
+    [CmdletBinding()]
+    param(
+    )
+
+    if(!Test-EnvironmentForScripts){
+        Set-EnvironmentForScripts
+    }
+
+    $environment = Get-EnvironmentForScripts
+
+    $environment.CLASS_ORG
+} Export-ModuleMember -Function Get-EnvOwner
+
+
 function Test-EnvironmentForScripts{
     [CmdletBinding()]
     param(

@@ -34,16 +34,21 @@ function Get-TeacherOfConflictPracticeRepo{
     param(
         [Parameter(Mandatory, Position=0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [string]$User,
-        [Parameter(Mandatory)][string]$Owner
+        [Parameter()][string]$Owner
     )
-    $repo = "{0}/conflict-practice-{1}" -f $Owner, $User
 
-    $command = 'gh pr view 1 -R {0} --json author' -f $repo
-    
-    $result = Invoke-GhExpression $command -Whatif:$WhatIfPreference
+    process{
 
-    return $result
+        $Owner = $Owner ?? $(Get-EnvOwner)
 
+        $repo = "{0}/conflict-practice-{1}" -f $Owner, $User
+        
+        $command = 'gh pr view 1 -R {0} --json author' -f $repo
+
+        $result = Invoke-GhExpression $command -Whatif:$WhatIfPreference
+        
+        return $result
+    }
 } Export-ModuleMember -Function Get-TeacherOfConflictPracticeRepo
 
 function Get-TeacherOfGithubGameRepo{
@@ -51,14 +56,20 @@ function Get-TeacherOfGithubGameRepo{
     param(
         [Parameter(Mandatory, Position=0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [string]$User,
-        [Parameter(Mandatory)][string]$Owner
+        [Parameter()][string]$Owner
     )
-    $repo = "{0}/github-games-{1}" -f $Owner, $User
 
-    $command = 'gh issue view 1 -R {0} --json author' -f $repo
-    
-    $result = Invoke-GhExpression $command -Whatif:$WhatIfPreference
+    process{
 
-    return $result
+        $Owner = $Owner ?? $(Get-EnvOwner)
+
+        $repo = "{0}/github-games-{1}" -f $Owner, $User
+        
+        $command = 'gh issue view 1 -R {0} --json author' -f $repo
+
+        $result = Invoke-GhExpression $command -Whatif:$WhatIfPreference
+
+        return $result
+    }
 
 } Export-ModuleMember -Function Get-TeacherOfGithubGameRepo
