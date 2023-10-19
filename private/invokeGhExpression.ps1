@@ -6,8 +6,11 @@ function Invoke-GhExpression {
     )
 
     if ($PSCmdlet.ShouldProcess("Target", $command)) {
-        Invoke-Expression $Command | ConvertFrom-Json
+        $result = Invoke-Expression $Command | ConvertFrom-Json
     } else {
         Write-Information $command
+        $result = $null
     }
+
+    return $result
 }
