@@ -68,12 +68,18 @@ function Find-FirstActivityIssue{
 
     #check if no issue found
     if($issue.count -eq 0){
-        throw "No issue found with title $ISSUE_TITLE"
+        $msg = "No issue found with title [{title}] on {repo} "
+        $msg = $msg -replace "{title}",$ISSUE_TITLE
+        $msg = $msg -replace "{repo}",$repoName
+        throw $msg
     }
 
     #check if more than 1 issue found
     if($issue.count -gt 1){
-        throw "More than one issue found with title $ISSUE_TITLE"
+        $msg = "More than one issue found with title [{title}] on {repo} "
+        $msg = $msg -replace "{title}",$ISSUE_TITLE
+        $msg = $msg -replace "{repo}",$repoName
+        throw $msg
     }
 
     return $issue.number

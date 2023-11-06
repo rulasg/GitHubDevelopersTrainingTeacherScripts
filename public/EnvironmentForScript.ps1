@@ -59,7 +59,7 @@ function Get-OwnerFromEnvironment{
 
     $environment.Owner
 
-} Export-ModuleMember -Function Get-OwnerFromEnvironment
+}
 
 function Test-EnvironmentForScript{
     [CmdletBinding()]
@@ -94,7 +94,7 @@ function Test-EnvironmentForScript{
     }
 
     return $true
-} Export-ModuleMember -Function Test-EnvironmentForScript
+}
 
 function Resolve-Owner{
     [CmdletBinding()]
@@ -107,4 +107,4 @@ function Resolve-Owner{
     }
 
     return $Owner
-} Export-ModuleMember -Function Resolve-Owner
+}

@@ -2,7 +2,8 @@
 function Get-TeacherOfConflictPracticeRepo{
     [CmdletBinding(SupportsShouldProcess)]
     param(
-        [Parameter(Mandatory, Position=0, ValueFromPipeline, ValueFromPipelineByPropertyName)] [string]$User,
+        [Parameter(Mandatory, Position=0, ValueFromPipeline, ValueFromPipelineByPropertyName)] 
+        [string]$User,
         [Parameter()][string]$Owner
     )
 
@@ -14,7 +15,11 @@ function Get-TeacherOfConflictPracticeRepo{
 
         $result = Invoke-GhExpression $command -Whatif:$WhatIfPreference
 
-        return $result
+        $author = $result | Select-Object -ExpandProperty author
+
+        $ret = $author | Select-Object -Property login,name
+
+        return $ret
     }
 } Export-ModuleMember -Function Get-TeacherOfConflictPracticeRepo
 
@@ -34,7 +39,12 @@ function Get-TeacherOfGithubGameRepo{
 
         $result = Invoke-GhExpression $command -Whatif:$WhatIfPreference
 
-        return $result
+        $author = $result | Select-Object -ExpandProperty author
+
+        $ret = $author | Select-Object -Property login,name
+
+        return $ret
+
     }
 
 } Export-ModuleMember -Function Get-TeacherOfGithubGameRepo
