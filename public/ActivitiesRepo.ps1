@@ -30,7 +30,8 @@ function Test-ActivitiesRepo{
 function Remove-ActivityRepo{
     [CmdletBinding(SupportsShouldProcess)]
     param(
-        [Parameter(Mandatory)][ValidateSet("conflict-practice", "github-games")][string]$ActivityRepo,
+        [Parameter(Mandatory)][ValidateSet("conflict-practice", "github-games")]
+        [string]$ActivityRepo,
         [Parameter(Mandatory,ValueFromPipeline)][string]$User,
         [Parameter()][string]$Owner
     )
@@ -43,11 +44,6 @@ function Remove-ActivityRepo{
 
         if ($PSCmdlet.ShouldProcess($RepoName, "gh repo delete")) {
             gh repo delete $RepoName --yes
-            if(!$?){
-                $repoURL = "https://$ROOT_URL/$RepoName"
-                $repoURL | Write-Verbose
-            }
-
         }
     }
 } Export-ModuleMember -Function Remove-ActivityRepo
