@@ -139,3 +139,20 @@ FULL CLEANUP
 CLEAN UP BEHIND You
 
     To save problems to teacher that may come behind you, remove the ActivityRepos that you create. This way if a user repeats training, the second teacher will not have problems not being able to delete and recreate repos for that user.
+
+
+Get-ClassRepo
+Get-ClassUsers
+Get-ActivityRepoName
+
+Get-TeacherOfConflictPracticeRepo
+Get-TeacherOfGithubGameRepo
+
+Test-ConflictPracticeRepoPR3
+
+Remove-ActivityRepo
+Test-ActivitiesRepo
+
+Clear-EnvironmentForScript
+Get-EnvironmentForScript
+Set-EnvironmentForScript

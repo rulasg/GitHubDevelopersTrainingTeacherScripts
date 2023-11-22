@@ -13,7 +13,6 @@ function Test-ActivitiesRepo{
 
         $repoName | Write-Verbose
 
-        # $result = gh pr view 3 -R "$CLASS_ORG/conflict-practice-$User" --json title | convertfrom-json
         $result = gh repo view $RepoName *>&1
         $Exists = $?
 
