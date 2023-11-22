@@ -29,9 +29,8 @@ function Test-ConflictPracticeRepoPR3{
 
         $user | write-verbose
 
-        $RepoName = "$CLASS_ORG/conflict-practice-$User"
+        $repoName = Get-ActivityRepoName -User $user -ActivityRepo "conflict-practice"
 
-        # $result = gh pr view 3 -R "$CLASS_ORG/conflict-practice-$User" --json title | convertfrom-json
         $result = gh pr view 3 -R $RepoName *>&1
 
         $result | write-verbose
