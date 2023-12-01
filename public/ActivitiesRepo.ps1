@@ -1,5 +1,5 @@
 
-function Test-ActivitiesRepo{
+function Test-ActivityRepo{
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory)][ValidateSet("conflict-practice", "github-games", "all")][string]$ActivityRepo,
@@ -11,7 +11,7 @@ function Test-ActivitiesRepo{
 
         if($ActivityRepo -eq "all"){
             "conflict-practice", "github-games" | ForEach-Object {
-                Test-ActivitiesRepo -ActivityRepo $_ -User $User -Owner $Owner
+                Test-ActivityRepo -ActivityRepo $_ -User $User -Owner $Owner
             }
             return
         }
@@ -31,7 +31,7 @@ function Test-ActivitiesRepo{
             Exists = $Exists
         }
     }
-} Export-ModuleMember -Function Test-ActivitiesRepo
+} Export-ModuleMember -Function Test-ActivityRepo
 
 function Remove-ActivityRepo{
     [CmdletBinding(SupportsShouldProcess)]

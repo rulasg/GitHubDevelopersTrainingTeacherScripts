@@ -39,17 +39,17 @@ GET USERS FORM A CLASS
 
 TEST IF USER HAVE THEIR ACTIVITY REPO READY
 
-    Use the command Test-ActivitiesRepo with the output of Get-ClassUsers to test if the users if a hole class have their activity repo exists.
+    Use the command Test-ActivityRepo with the output of Get-ClassUsers to test if the users if a hole class have their activity repo exists.
 
     The following command extracts the class members of rulasg-231010 and checks for each user if the conflict-practice repo exists.
 
-    > Get-ClassUsers -RepoName rulasg-231010 | Test-ActivitiesRepo -ActivityRepo conflict-practice
+    > Get-ClassUsers -RepoName rulasg-231010 | Test-ActivityRepo -ActivityRepo conflict-practice
 
     User       Repo                                               Exists
     ----       ----                                               ------
     rulasg     ps-developers-sandbox/conflict-practice-rulasg       True
 
-    > Get-ClassUsers -RepoName rulasg-231010 | Test-ActivitiesRepo -ActivityRepo github-games
+    > Get-ClassUsers -RepoName rulasg-231010 | Test-ActivityRepo -ActivityRepo github-games
 
     User       Repo                                          Exists
     ----       ----                                          ------
