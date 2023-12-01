@@ -2,12 +2,19 @@
 function Test-ActivitiesRepo{
     [CmdletBinding(SupportsShouldProcess)]
     param(
-        [Parameter(Mandatory)][ValidateSet("conflict-practice", "github-games")][string]$ActivityRepo,
+        [Parameter(Mandatory)][ValidateSet("conflict-practice", "github-games", "all")][string]$ActivityRepo,
         [Parameter(Mandatory,ValueFromPipeline)][string]$User,
         [Parameter()][string]$Owner
     )
 
     process{
+
+        if($ActivityRepo -eq "all"){
+            "conflict-practice", "github-games" | ForEach-Object {
+                Test-ActivitiesRepo -ActivityRepo $_ -User $User -Owner $Owner
+            }
+            return
+        }
 
         $repoName = Get-ActivityRepoName -User $User -Owner $Owner -ActivityRepo $ActivityRepo
 
@@ -29,13 +36,20 @@ function Test-ActivitiesRepo{
 function Remove-ActivityRepo{
     [CmdletBinding(SupportsShouldProcess)]
     param(
-        [Parameter(Mandatory)][ValidateSet("conflict-practice", "github-games")]
+        [Parameter(Mandatory)][ValidateSet("conflict-practice", "github-games", "all")]
         [string]$ActivityRepo,
         [Parameter(Mandatory,ValueFromPipeline)][string]$User,
         [Parameter()][string]$Owner
     )
 
     process{
+
+        if($ActivityRepo -eq "all"){
+            "conflict-practice", "github-games" | ForEach-Object {
+                Remove-ActivityRepo -ActivityRepo $_ -User $User -Owner $Owner
+            }
+            return
+        }
 
         $repoName = Get-ActivityRepoName -User $User -Owner $Owner -ActivityRepo $ActivityRepo
 

@@ -121,7 +121,7 @@ FULL CLEANUP
     Maybe you have been giving some training in the last weeks and after a few weeks you want to clean all the activities repos of all  your class repo. 
     Do this on a single command piping Get-ClassRepo with Get-ClassUsers and Remove-ActivitiesRepo.
 
-    > Get-ClassRepo -name rulasg-230920 | select -ExpandProperty name | Get-ClassUsers | Remove-ActivityRepo -ActivityRepo conflict-practice
+    > Get-ClassRepo -name rulasg-230920 | select -ExpandProperty name | Get-ClassUsers | Remove-ActivityRepo -ActivityRepo all
     HTTP 403: Must have admin rights to Repository. (https://api.github.com/repos/ps-developers-sandbox/conflict-practice-madkoo)
     HTTP 404: Not Found (https://api.github.com/repos/ps-developers-sandbox/conflict-practice-rulasg)
     ✓ Deleted repository ps-developers-sandbox/conflict-practice-Akhilesh-2
