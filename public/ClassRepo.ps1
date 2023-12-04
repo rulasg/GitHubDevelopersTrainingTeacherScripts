@@ -28,6 +28,10 @@ function Get-ClassRepo{
 
 } Export-ModuleMember -Function Get-ClassRepo
 
+<#
+.SYNOPSIS
+    Removes a Class Repo from GitHub
+#>
 function Remove-ClassRepo{
     [CmdletBinding(SupportsShouldProcess)]
     param(
@@ -37,7 +41,7 @@ function Remove-ClassRepo{
     process{
 
         $repoName = Get-ClassRepoName -RepoName $Name -Owner $Owner
-        
+
         if ($PSCmdlet.ShouldProcess($Name, "gh repo delete")) {
             gh repo delete $RepoName --yes
         }
