@@ -19,7 +19,7 @@ function Get-ActivityRepoName{
 }
 
 function Get-ClassRepoName{
-    [CmdletBinding(SupportsShouldProcess)]
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory)][string]$RepoName,
         [Parameter()][string]$Owner
