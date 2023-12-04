@@ -118,8 +118,9 @@ REMOVE THE ACTIVITY REPOS OF A CLASS
 
 FULL CLEANUP
 
-    Maybe you have been giving some training in the last weeks and after a few weeks you want to clean all the activities repos of all  your class repo. 
+    Maybe you have been giving some training in the last weeks and after a few weeks you want to clean all the activities repos of all your class repo.
     Do this on a single command piping Get-ClassRepo with Get-ClassUsers and Remove-ActivitiesRepo.
+    Later use Remove-ClassRepo to remove the class repo.
 
     > Get-ClassRepo -name rulasg-230920 | select -ExpandProperty name | Get-ClassUsers | Remove-ActivityRepo -ActivityRepo all
     HTTP 403: Must have admin rights to Repository. (https://api.github.com/repos/ps-developers-sandbox/conflict-practice-madkoo)
@@ -135,6 +136,9 @@ FULL CLEANUP
     HTTP 403 will happen if you do where not who created this repo. Use Get-TeacherOfConflictPracticeRepo to figure it out.
 
     HTTP 404 will happen if the repo does not exist.
+
+    > Get-ClassRepo -name rulasg-230920 | Remove-ClassRepo
+    ✓ Deleted repository ps-developers-sandbox/rulasg-230920
 
 CLEAN UP BEHIND You
 
