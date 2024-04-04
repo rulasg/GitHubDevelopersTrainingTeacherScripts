@@ -19,6 +19,29 @@ KEYWORDS
 SEE ALSO
     https://github.com/rulasg/TestingHelper/
 
+INSTALL THE Module
+
+    https://www.powershellgallery.com/packages/GitHubDevelopersTrainingTeacherScripts
+    The Module is published on Powershell Gallery. You can install it with the following command.
+    
+    > Install-Module -Name GitHubDevelopersTrainingTeacherScripts -AllowPrerelease -Force  
+    > Import-Module -Name GitHubDevelopersTrainingTeacherScripts                         
+    > Get-Command -Module GitHubDevelopersTrainingTeacherScripts      
+
+    CommandType     Name                                               Version    Source
+    -----------     ----                                               -------    ------
+    Function        Clear-EnvironmentForScript                         0.3.6      GitHubDevelopersTrainingTeacherScripts
+    Function        Get-ClassRepo                                      0.3.6      GitHubDevelopersTrainingTeacherScripts
+    Function        Get-ClassUsers                                     0.3.6      GitHubDevelopersTrainingTeacherScripts
+    Function        Get-EnvironmentForScript                           0.3.6      GitHubDevelopersTrainingTeacherScripts
+    Function        Get-TeacherOfConflictPracticeRepo                  0.3.6      GitHubDevelopersTrainingTeacherScripts
+    Function        Get-TeacherOfGithubGameRepo                        0.3.6      GitHubDevelopersTrainingTeacherScripts
+    Function        Remove-ActivityRepo                                0.3.6      GitHubDevelopersTrainingTeacherScripts
+    Function        Remove-ClassRepo                                   0.3.6      GitHubDevelopersTrainingTeacherScripts
+    Function        Set-EnvironmentForScript                           0.3.6      GitHubDevelopersTrainingTeacherScripts
+    Function        Test-ActivityRepo                                  0.3.6      GitHubDevelopersTrainingTeacherScripts
+    Function        Test-ConflictPracticeRepoPR3                       0.3.6      GitHubDevelopersTrainingTeacherScripts
+
 SET ENVIRONMENT VARIABLE
 
     Use the command Set-EnvironmentForScripts to set the context of the script execution.
