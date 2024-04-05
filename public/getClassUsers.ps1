@@ -1,4 +1,4 @@
-function Get-ClassUsers{
+function Get-ClassAttendeeHandles{
     [CmdletBinding(SupportsShouldProcess)]
     param(
         # Target repo
@@ -35,7 +35,48 @@ function Get-ClassUsers{
         
         return $list
     }
-} Export-ModuleMember -Function Get-ClassUsers
+} Export-ModuleMember -Function Get-ClassAttendeeHandles
+
+function Get-ClassRepoIssueComments{
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        # Target repo
+        [Parameter(Mandatory,Position=0, ValueFromPipeline)][string]$RepoName,
+        # Owner of the repo
+        [Parameter()][string]$Owner
+    )
+
+    process {
+
+        # $owner = Get-OwnerFromEnvironment -Owner $Owner
+        $owner = Resolve-Owner -Owner $Owner
+
+        $issueId = Find-FirstActivityIssue -RepoName $RepoName -Owner $owner
+        
+        $command = 'gh issue view {issueId} -R {owner}/{repo} --json comments'
+        $command = $command -replace '{issueId}', $issueId
+        $command = $command -replace '{repo}', $RepoName
+        $command = $command -replace '{owner}', $owner
+        
+        if ($PSCmdlet.ShouldProcess("Invoke-GhExpression", $command)) {
+            $result = Invoke-GhExpression $command
+        } else {
+            Write-Information $command
+            # Mock asnwer for testing
+            $result = $null
+        }
+        
+        if(!$result){
+            return $null
+        }
+
+        $comments = $result | ConvertFrom-Json | Select-Object -ExpandProperty comments
+
+        $list = $comments.body  
+
+        return $list
+    }
+} Export-ModuleMember -Function Get-ClassRepoIssueComments
 
 function Find-FirstActivityIssue{
     [CmdletBinding(SupportsShouldProcess)]

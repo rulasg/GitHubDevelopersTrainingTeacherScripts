@@ -32,7 +32,7 @@ INSTALL THE Module
     -----------     ----                                               -------    ------
     Function        Clear-EnvironmentForScript                         0.3.6      GitHubDevelopersTrainingTeacherScripts
     Function        Get-ClassRepo                                      0.3.6      GitHubDevelopersTrainingTeacherScripts
-    Function        Get-ClassUsers                                     0.3.6      GitHubDevelopersTrainingTeacherScripts
+    Function        Get-ClassAttendeeHandles                                     0.3.6      GitHubDevelopersTrainingTeacherScripts
     Function        Get-EnvironmentForScript                           0.3.6      GitHubDevelopersTrainingTeacherScripts
     Function        Get-TeacherOfConflictPracticeRepo                  0.3.6      GitHubDevelopersTrainingTeacherScripts
     Function        Get-TeacherOfGithubGameRepo                        0.3.6      GitHubDevelopersTrainingTeacherScripts
@@ -55,24 +55,24 @@ SET ENVIRONMENT VARIABLE
 
 GET USERS FORM A CLASS
 
-    Use the command Get-ClassUsers to get the users from a class
+    Use the command Get-ClassAttendeeHandles to get the users from a class
 
-    > Get-ClassUsers -RepoName rulasg-231010
+    > Get-ClassAttendeeHandles -RepoName rulasg-231010
     rulasg
 
 TEST IF USER HAVE THEIR ACTIVITY REPO READY
 
-    Use the command Test-ActivityRepo with the output of Get-ClassUsers to test if the users if a hole class have their activity repo exists.
+    Use the command Test-ActivityRepo with the output of Get-ClassAttendeeHandles to test if the users if a hole class have their activity repo exists.
 
     The following command extracts the class members of rulasg-231010 and checks for each user if the conflict-practice repo exists.
 
-    > Get-ClassUsers -RepoName rulasg-231010 | Test-ActivityRepo -ActivityRepo conflict-practice
+    > Get-ClassAttendeeHandles -RepoName rulasg-231010 | Test-ActivityRepo -ActivityRepo conflict-practice
 
     User       Repo                                               Exists
     ----       ----                                               ------
     rulasg     ps-developers-sandbox/conflict-practice-rulasg       True
 
-    > Get-ClassUsers -RepoName rulasg-231010 | Test-ActivityRepo -ActivityRepo github-games
+    > Get-ClassAttendeeHandles -RepoName rulasg-231010 | Test-ActivityRepo -ActivityRepo github-games
 
     User       Repo                                          Exists
     ----       ----                                          ------
@@ -82,9 +82,9 @@ CONFLICT PRACTICE REPO about_GitHubDevelopersTrainingTeacherScripts
 
     Some times the creation of conflict-practice repos fail partially. So the repo exists but is not fully ready. Use the command Test-ConflictPracticeRepoPR3 to check that the repo contains 3 Pull Requests, proving that the repo is fully ready for the conflict practice.
 
-    Use the Get-ClassUsers command to chose the users to test.
+    Use the Get-ClassAttendeeHandles command to chose the users to test.
 
-    > Get-ClassUsers -RepoName rulasg-231010 | Test-ConflictPracticeRepoPR3
+    > Get-ClassAttendeeHandles -RepoName rulasg-231010 | Test-ConflictPracticeRepoPR3
 
     User       Repo                                               Exists
     ----       ----                                               ------
@@ -135,17 +135,17 @@ REMOVE THE ACTIVITY REPOS OF A CLASS
 
     If you want to quicker recreate the repos of a class pipe Get-ClassUsert to Remove-ActivitiesRepo to remove all the activity repos of a class.
 
-    > Get-ClassUsers -RepoName "rulasg-231017-2" | Remove-ActivityRepo -ActivityRepo github-games     
+    > Get-ClassAttendeeHandles -RepoName "rulasg-231017-2" | Remove-ActivityRepo -ActivityRepo github-games     
     ✓ Deleted repository ps-developers-sandbox/github-games-rulasg
     ✓ Deleted repository ps-developers-sandbox/github-games-raulgeu
 
 FULL CLEANUP
 
     Maybe you have been giving some training in the last weeks and after a few weeks you want to clean all the activities repos of all your class repo.
-    Do this on a single command piping Get-ClassRepo with Get-ClassUsers and Remove-ActivitiesRepo.
+    Do this on a single command piping Get-ClassRepo with Get-ClassAttendeeHandles and Remove-ActivitiesRepo.
     Later use Remove-ClassRepo to remove the class repo.
 
-    > Get-ClassRepo -name rulasg-230920 | select -ExpandProperty name | Get-ClassUsers | Remove-ActivityRepo -ActivityRepo all
+    > Get-ClassRepo -name rulasg-230920 | select -ExpandProperty name | Get-ClassAttendeeHandles | Remove-ActivityRepo -ActivityRepo all
     HTTP 403: Must have admin rights to Repository. (https://api.github.com/repos/ps-developers-sandbox/conflict-practice-madkoo)
     HTTP 404: Not Found (https://api.github.com/repos/ps-developers-sandbox/conflict-practice-rulasg)
     ✓ Deleted repository ps-developers-sandbox/conflict-practice-Akhilesh-2
